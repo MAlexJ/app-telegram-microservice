@@ -36,7 +36,7 @@ public class MongoDatabaseConfiguration extends AbstractReactiveMongoConfigurati
   @Bean
   public ReactiveMongoTransactionManager transactionManager(
       ReactiveMongoDatabaseFactory dbFactory) {
-    log.info("MongoDb configuration MongoTransactionManager");
+    log.info("MongoDb configuration reactive transaction manager");
     return new ReactiveMongoTransactionManager(dbFactory);
   }
 

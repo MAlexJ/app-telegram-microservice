@@ -1,10 +1,10 @@
 ###
-GET http://localhost:8080/v1/subscription
+GET http://localhost:8080/v1/subscriptions
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p15kV_CF0i5Hg15tuhwyakfSkBFWYs108QU7IJUXwSY
 
 
 ###
-POST http://localhost:8080/v1/subscription
+POST http://localhost:8080/v1/subscriptions
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p15kV_CF0i5Hg15tuhwyakfSkBFWYs108QU7IJUXwSY
 Content-Type: application/json
 
@@ -22,4 +22,5 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:8080/v1/subscription/65ef70ef672dd17c63b226ab
+PATCH http://localhost:8080/v1/subscriptions/65ef7990a9dfbc4b358e5343
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p15kV_CF0i5Hg15tuhwyakfSkBFWYs108QU7IJUXwSY

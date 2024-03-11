@@ -1,10 +1,8 @@
 package com.malexj.controller;
 
-import com.malexj.mapper.ObjectMapper;
-import com.malexj.model.entity.SubscriptionEntity;
 import com.malexj.model.request.SubscriptionRequest;
 import com.malexj.model.response.SubscriptionResponse;
-import com.malexj.repository.SubscriptionRepository;
+import com.malexj.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,33 +31,27 @@ import reactor.core.publisher.Mono;
  * href="https://docs.spring.io/spring-framework/reference/web/webflux/controller/ann-methods/responseentity.html">ResponseEntity</a>
  */
 @RestController
-@RequestMapping("/v1/subscription")
+@RequestMapping("/v1/subscriptions")
 @RequiredArgsConstructor
 public class SubscriptionRestController {
 
-  private final ObjectMapper mapper;
-  private final SubscriptionRepository repository;
+  private final SubscriptionService service;
 
   @GetMapping
-  public ResponseEntity<Flux<SubscriptionEntity>> findAllSubscriptions() {
-    Flux<SubscriptionEntity> subscriptions = repository.findAll();
-    return ResponseEntity.ok(subscriptions);
+  public ResponseEntity<Flux<SubscriptionResponse>> findAllSubscriptions() {
+    return ResponseEntity.ok(service.findAll());
   }
 
   @PostMapping
-  public ResponseEntity<Mono<SubscriptionResponse>> createSubscription(
+  public ResponseEntity<Mono<SubscriptionResponse>> subscribe(
       @RequestBody SubscriptionRequest request) {
-    Mono<SubscriptionResponse> response =
-        Mono.fromSupplier(() -> mapper.requestToEntity(request))
-            .flatMap(repository::save)
-            .map(mapper::entityToResponse);
-    return ResponseEntity.ok(response);
+    return ResponseEntity.ok(service.createSubscription(request));
   }
 
   @PatchMapping("/{id}")
   public Mono<ResponseEntity<Void>> unsubscribe(@PathVariable String id) {
-    return repository
-        .updateSubscriptionEntity(id)
+    return service
+        .updateSubscription(id)
         .map(resp -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
   }
 }

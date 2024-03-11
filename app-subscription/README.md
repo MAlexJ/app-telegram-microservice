@@ -6,6 +6,18 @@
 * Springboot 3.2.3
 * Mongo atlas database
 
+### minimal settings to start project
+
+1. Create .env file in root of the project
+2. Add env variables to it
+
+``` java
+# app-subscription-service:
+APP_SUBSCRIPTION_SERVICE_MONGODB_URI - url to mongo db
+APP_SUBSCRIPTION_SERVICE_JWT_TOKEN - bearer token
+APP_SUBSCRIPTION_SERVICE_JWT_SECRET_KEY - secred key
+```
+
 ### API documentation
 
 Project uses OpenAPI (link: https://springdoc.org/) that will describe the API
