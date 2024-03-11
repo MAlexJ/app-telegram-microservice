@@ -1,0 +1,3 @@
+rootProject.name = 'app-telegram-microservice'
+include 'app-subscription',
+        'app-rss'

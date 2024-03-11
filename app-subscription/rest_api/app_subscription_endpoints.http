@@ -1,0 +1,25 @@
+###
+GET http://localhost:8080/v1/subscription
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p15kV_CF0i5Hg15tuhwyakfSkBFWYs108QU7IJUXwSY
+
+
+###
+POST http://localhost:8080/v1/subscription
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p15kV_CF0i5Hg15tuhwyakfSkBFWYs108QU7IJUXwSY
+Content-Type: application/json
+
+{
+  "chatId": 1,
+  "templateId": 1,
+  "url": "url",
+  "filter": {
+    "condition": {
+      "valueType": "PHRASE",
+      "value": "word"
+    }
+  },
+  "isActive": true
+}
+
+###
+PATCH http://localhost:8080/v1/subscription/65ef70ef672dd17c63b226ab

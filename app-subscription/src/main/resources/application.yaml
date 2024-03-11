@@ -1,0 +1,41 @@
+server:
+  port: ${APP_SUBSCRIPTION_SERVICE_PORT:8080}
+
+spring:
+  application:
+    name: ${APP_SUBSCRIPTION_SERVICE_NAME:app-subscription-service}
+  config:
+    import: optional:file:.env[.properties]
+  data:
+    mongodb:
+      uri: ${APP_SUBSCRIPTION_SERVICE_MONGODB_URI:uri}
+      database: ${APP_SUBSCRIPTION_SERVICE_MONGODB_DATABASE:app-subscription-db}
+      auto-index-creation: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
+    enabled-by-default: ${APP_SUBSCRIPTION_SERVICE_ACTUATOR_ENABLED:true}
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+
+springdoc:
+  swagger-ui:
+    path: /api/documentation
+
+jwt:
+  app:
+    token: ${APP_SUBSCRIPTION_SERVICE_JWT_TOKEN:token}
+    secret: ${APP_SUBSCRIPTION_SERVICE_JWT_SECRET_KEY:jwt_key}
