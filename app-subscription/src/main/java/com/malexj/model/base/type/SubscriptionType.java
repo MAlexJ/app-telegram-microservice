@@ -1,4 +1,4 @@
-package com.malexj.model.type;
+package com.malexj.model.base.type;
 
 public enum SubscriptionType {
   RSS,

@@ -1,4 +1,4 @@
-package com.malexj.model.filter;
+package com.malexj.model.base.filter;
 
 public enum FilterValueType {
   WORD,

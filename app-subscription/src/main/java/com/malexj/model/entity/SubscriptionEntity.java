@@ -1,9 +1,9 @@
 package com.malexj.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.malexj.model.filter.Filter;
-import com.malexj.model.type.SubscriptionContext;
-import com.malexj.model.type.SubscriptionType;
+import com.malexj.model.base.filter.Filter;
+import com.malexj.model.base.type.SubscriptionContext;
+import com.malexj.model.base.type.SubscriptionType;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class SubscriptionEntity implements Persistable<String> {
 
   @MongoId private String id;
   private Long chatId;
-  private Long templateId;
+  private String templateId;
   private SubscriptionType type;
   private SubscriptionContext context;
   private Filter filter;
