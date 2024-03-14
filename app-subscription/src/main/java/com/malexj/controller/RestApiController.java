@@ -35,14 +35,16 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/v1/subscriptions")
 @RequiredArgsConstructor
-public class SubscriptionRestController {
+public class RestApiController {
 
   private final SubscriptionService service;
 
   @GetMapping
-  public ResponseEntity<Flux<SubscriptionResponse>> findAllSubscriptions() {
+  public ResponseEntity<Flux<SubscriptionResponse>> findAllSubscriptions(
+      @RequestParam(name = "type", required = false) String type,
+      @RequestParam(name = "active", required = false) Boolean isActive) {
     log.info("HTTP: find all subscriptions");
-    return ResponseEntity.ok(service.findAll());
+    return ResponseEntity.ok(service.findAll(type, isActive));
   }
 
   @PostMapping
