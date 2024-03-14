@@ -8,32 +8,41 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
-@Document(collection = "subscriptions")
-@TypeAlias("SubscriptionEntity")
-public class SubscriptionEntity implements Persistable<String> {
-
+@Document(collection = "topics")
+@TypeAlias("TopicEntity")
+public class TopicEntity implements Persistable<String> {
   @MongoId private String id;
   private Long chatId;
-  private Long templateId;
+  private String subscriptionId;
   private SubscriptionType type;
   private SubscriptionContext context;
   private Filter filter;
-  private boolean isActive;
-
-  @LastModifiedDate private LocalDateTime lastModified;
-  @CreatedDate private LocalDateTime created;
+  private String title;
+  private String description;
+  private String link;
 
   /**
-   * How Spring Data Jdbc determines that the object is new: <br>
-   * Info: <a href="https://habr.com/ru/companies/otus/articles/526030/">Spring isNew()</a>
+   * Spring Data: Unique field in MongoDB document
+   *
+   * <p>link: <a
+   * href="https://stackoverflow.com/questions/49385130/spring-data-unique-field-in-mongodb-document">Unique
+   * field in MongoDB</a> <br>
+   * 1. spring.data.mongodb.auto-index-creation=true <br>
+   * 2. but you have to delete your database and then re-run your application
    */
+  @Indexed(unique = true)
+  private String md5Hash;
+
+  private boolean isActive;
+  @CreatedDate private LocalDateTime created;
+
   @Override
   @JsonIgnore
   public boolean isNew() {

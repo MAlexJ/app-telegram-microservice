@@ -19,7 +19,7 @@ plugins {
 }
 
 group = 'com.malexj'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 
 java {
     sourceCompatibility = "${javaVersion}"
@@ -44,6 +44,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    implementation "com.apptasticsoftware:rssreader:${rssReaderVersion}"
     implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:${springdocOpenapiWeb}"
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

@@ -1,20 +1,16 @@
 package com.malexj.controller;
 
-import com.malexj.model.request.SubscriptionRequest;
-import com.malexj.model.response.SubscriptionResponse;
-import com.malexj.service.SubscriptionService;
-import lombok.RequiredArgsConstructor;
+import com.malexj.model.http.request.RssRequest;
+import com.malexj.model.http.response.RssResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
  * WebFlux supports using a single value reactive type to produce the ResponseEntity asynchronously,
- * and/or single and multi-value reactive types for the body. <br>
- * This allows a variety of async responses with ResponseEntity as follows:
+ * and/or single and multi-value reactive types for the body. This allows a variety of async
+ * responses with ResponseEntity as follows:
  *
  * <ul>
  *   <li>ResponseEntity<Mono<T>> or ResponseEntity<Flux<T>> make the response status and headers
@@ -33,30 +29,17 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @RestController
-@RequestMapping("/v1/subscriptions")
-@RequiredArgsConstructor
-public class SubscriptionRestController {
+@RequestMapping("/v1")
+public class RssRestController {
 
-  private final SubscriptionService service;
-
-  @GetMapping
-  public ResponseEntity<Flux<SubscriptionResponse>> findAllSubscriptions() {
-    log.info("HTTP: find all subscriptions");
-    return ResponseEntity.ok(service.findAll());
+  @PostMapping("/rss")
+  public ResponseEntity<Mono<RssResponse>> findRssItemsByUrl(@RequestBody RssRequest request) {
+    log.trace("Rss request - {}", request);
+    return ResponseEntity.ok(Mono.empty());
   }
 
-  @PostMapping
-  public ResponseEntity<Mono<SubscriptionResponse>> subscribe(
-      @RequestBody SubscriptionRequest request) {
-    log.info("HTTP: subscribe, request - {}", request);
-    return ResponseEntity.ok(service.createSubscription(request));
-  }
-
-  @PatchMapping("/{id}")
-  public Mono<ResponseEntity<Void>> unsubscribe(@PathVariable String id) {
-    log.info("HTTP: unsubscribe, id - {}", id);
-    return service
-        .updateSubscription(id)
-        .map(resp -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
-  }
+//  @GetMapping("/rss/topics")
+//  public ResponseEntity<Void> findAllRssTopics() {
+//    return ResponseEntity.ok().build();
+//  }
 }

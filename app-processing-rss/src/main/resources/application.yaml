@@ -1,0 +1,50 @@
+server:
+  port: ${APP_RSS_PROCESSING_SERVICE_PORT:0}
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: ${APP_RSS_PROCESSING_SERVICE_PROCESSING_NAME:rss-processing-service}
+  data:
+    mongodb:
+      uri: ${APP_RSS_PROCESSING_SERVICE_MONGODB_URI:uri}
+      database: ${APP_RSS_PROCESSING_SERVICE_MONGODB_DATABASE:app-rss-processing-db}
+      auto-index-creation: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    prefer-ip-address: true
+
+app-subscription-service:
+  application:
+    name: app-subscription-service
+  endpoint:
+    get:
+      subscriptions: /v1/subscriptions
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+
+springdoc:
+  swagger-ui:
+    path: /api/documentation
+
+scheduled:
+  processing:
+    rss:
+      cron: ${APP_RSS_PROCESSING_SERVICE_SCHEDULER_CRONE:0 */15 * * * *}
